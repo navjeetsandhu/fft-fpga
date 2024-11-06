@@ -33,7 +33,6 @@ int main(int argc, char* argv[]){
     create_data(inp, sz);
   
     const unsigned inv = config.inv;
-    const bool burst = config.burst;
 
     for(unsigned i = 0; i < config.iter; i++){
       cout << i << ": Calculating FFT - " << endl;
