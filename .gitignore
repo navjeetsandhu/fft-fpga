@@ -10,7 +10,8 @@ build*
 svm_build/
 debug*
 test_*
-
+.idea/
+cmake-build-debug/
 tags
 *.DS_Store
 slurm*
