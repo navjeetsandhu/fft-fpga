@@ -205,8 +205,7 @@ void fft1d(__global __attribute__((buffer_location(SVM_HOST_BUFFER_LOCATION))) v
     /* As required by the FFT engine, gather input data from 8 distinct 
      * segments of the input buffer; for simplicity, this implementation 
      * does not attempt to coalesce memory accesses and this leads to 
-     * higher resource utilization (see the fft2d example for advanced 
-     * memory access techniques)
+     * higher resource utilization
      */
 
     int base = (i / (N / 8)) * N;

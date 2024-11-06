@@ -63,7 +63,7 @@ TEST_F(OpenCLUtilsTest, FindValidDevice){
  */
 TEST_F(OpenCLUtilsTest, CreateValidProgram){
   cl_int status = 0;
-  const char* path = "p520_hpc_sg280l/emulation/fft3d_bram_64_nointer/fft3d_bram.aocx";
+  const char* path = "p520_hpc_sg280l/emulation/fft1d_bram_64_nointer/fft1d_bram.aocx";
   // bad context
 
   cl_context context = clCreateContext(NULL, 1, &device, NULL, NULL, &status);

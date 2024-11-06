@@ -25,7 +25,7 @@ TEST(fftFPGASetupTest, ValidInit){
   EXPECT_EQ(fpga_initialize(platform_name, "TEST", false), -4);
 
   // right path and platform names
-  const char* path = "p520_hpc_sg280l/emulation/fft3d_bram_64_nointer/fft3d_bram.aocx";
+  const char* path = "p520_hpc_sg280l/emulation/fft1d_bram_64_nointer/fft1d_bram.aocx";
   EXPECT_EQ(fpga_initialize(platform_name, path, false), 0);
   fpga_final();
 }

@@ -86,8 +86,6 @@ separate_arguments(PROF_FLAGS)
 
 if (INTELFPGAOPENCL_FOUND)
   add_subdirectory(fft1d)
-  add_subdirectory(fft2d)
-  add_subdirectory(fft3d)
 else()
   message(FATAL_ERROR, "Intel FPGA OpenCL SDK not found!")
 endif()
