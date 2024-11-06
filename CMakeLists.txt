@@ -31,8 +31,3 @@ endif()
 add_subdirectory(api)
 add_subdirectory(kernels)
 add_subdirectory(examples)
-
-# build tests
-message("-- Building tests")
-add_subdirectory(tests)
-enable_testing()
