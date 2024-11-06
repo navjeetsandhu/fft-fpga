@@ -45,31 +45,6 @@ int main(int argc, char* argv[]){
             runtime[i] = fftfpgaf_c2c_1d(num, inp, out, inv, config.batch);
           break;
         }
-        case 2: {
-          if(config.use_bram && config.use_usm)
-            runtime[i] = fftfpgaf_c2c_2d_bram_svm(num, inp, out, inv, config.batch);
-          else if(config.use_bram && !config.use_usm)
-            runtime[i] = fftfpgaf_c2c_2d_bram(num, inp, out, inv, burst, config.batch);
-          else
-            runtime[i] = fftfpgaf_c2c_2d_ddr(num, inp, out, inv); 
-          break;
-        }
-        case 3:{
-          if(config.use_bram)
-            runtime[i] = fftfpgaf_c2c_3d_bram(num, inp, out, inv, burst);
-          else if(!config.use_bram && (!config.use_usm) && (config.batch > 1))
-            runtime[i] = fftfpgaf_c2c_3d_ddr_batch(num, inp, out, inv, burst, config.batch);
-          else if(config.use_usm){
-            if(config.batch > 1)
-              runtime[i] = fftfpgaf_c2c_3d_ddr_svm_batch(num, inp, out, inv, config.batch);
-            else 
-              runtime[i] = fftfpgaf_c2c_3d_ddr_svm(num, inp, out, inv, burst);
-            break;
-          }
-          else
-            runtime[i] = fftfpgaf_c2c_3d_ddr(num, inp, out, inv);
-          break;
-        }
         default:
           break;
       }

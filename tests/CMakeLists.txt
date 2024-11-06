@@ -7,8 +7,6 @@ project(testfftfpga VERSION 2.0
 add_executable(test_fftfpga
       test_fft_setup.cpp
       test_fft1d_fpga.cpp
-      test_fft2d_fpga.cpp
-      test_fft3d_fpga.cpp
       test_opencl_utils.cpp
 )
 
@@ -30,10 +28,7 @@ else()
   message(WARNING, "FFTW library not found. Cannot perform correctness tests!")
 endif()
 
-add_dependencies(test_fftfpga fft3d_bram_emulate)
-add_dependencies(test_fftfpga fft3d_ddr_emulate)
-add_dependencies(test_fftfpga fft2d_bram_emulate)
-add_dependencies(test_fftfpga fft2d_ddr_emulate)
+
 add_dependencies(test_fftfpga fft1d_emulate)
 
 add_test(

@@ -272,7 +272,7 @@ fpga_t fftfpgaf_c2c_1d_svm(const unsigned N, const float2 *inp, float2 *out, con
   cl_kernel fetch_kernel = clCreateKernel(program, "fetch", &status);
   checkError(status, "Failed to create fetch1 kernel");
   cl_kernel fft_kernel = clCreateKernel(program, "fft1d", &status);
-  checkError(status, "Failed to create fft3da kernel");
+  checkError(status, "Failed to create fft1d kernel");
 
   // Setup Queues to the kernels
   queue_setup();

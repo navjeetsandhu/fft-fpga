@@ -34,7 +34,7 @@ math(EXPR POINTS "1 << ${LOG_POINTS}")
 
 # Number of points in each dimension of the FFT being computed
 set(LOG_FFT_SIZE 6 CACHE STRING "Log of points of FFT")
-set_property(CACHE LOG_FFT_SIZE PROPERTY STRINGS 4 5 6 7 8 9)
+set_property(CACHE LOG_FFT_SIZE PROPERTY STRINGS 4 5 6 7 8 9 10)
 math(EXPR FFT_SIZE "1 << ${LOG_FFT_SIZE}")
 message("-- FFT size is ${FFT_SIZE}")
 math(EXPR DEPTH "1 << (${LOG_FFT_SIZE} + ${LOG_FFT_SIZE} - ${LOG_POINTS})")
