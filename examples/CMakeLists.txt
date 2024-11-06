@@ -7,6 +7,7 @@ set(examples fft)
 
 # create a target for each of the example 
 foreach(example ${examples})
+  message(STATUS ${example} + " create a target for each of the example ")
   add_executable(${example} 
                   ${example}.cpp helper.cpp)
 
