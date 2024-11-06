@@ -8,12 +8,11 @@ This repository provides OpenCL host code in the form of FFTW like APIs, which c
 
 ## Features
 
-- 1D, 2D and 3D Transforms
+- 1D Transforms
 - Input sizes of powers of 2
 - Single Precision (32 bit floating point)
 - C2C: Complex input to complex output
 - Out-of-place transforms
-- Batched 3D transforms
 - OpenCL Shared Virtual Memory (SVM) extensions for data transfers
 
 ## Supported FPGAs
@@ -59,20 +58,20 @@ Now onto synthesizing the OpenCL FFT kernels. These can be synthesized to run on
 
 ```bash
 make <kernel_name>_emu
-make fft3d_ddr_emulate
+make fft1d_ddr_emulate
 ```
 
 - Hardware Bitstream
 
 ```bash
 make <kernel_name>_syn
-make fft3d_ddr_syn
+make fft1d_ddr_syn
 ```
 
 Putting them all together, in order to execute the required FFT, set the path to the synthesized bitstream along with other correct configurations as command line parameters to the sample application generated.
 
 ```bash
-./fft --num=64 --dim=3 --path=fft3d_ddr_128.aocx
+./fft --num=64 --dim=1 --path=fft1d_ddr_128.aocx
 ```
 
 *Tip*: for emulation, use the `--emulate` command line parameter.
@@ -82,10 +81,7 @@ Putting them all together, in order to execute the required FFT, set the path to
 |     | Kernel Name | Description                         |
 | :-- | :---------- | :---------------------------------- |
 | 1D  | fft1d       | OpenCL design provided by Intel     |
-| 2D  | fft2d\_ddr  | DDR memory is used for 2D Transpose |
-|     | fft2d\_bram | BRAM is used for 2D Transpose       |
-| 3D  | fft3d\_ddr  | DDR memory is used for 3D Transpose |
-|     | fft3d\_bram | BRAM is used for 3D Transpose       |
+
 
 These kernels can be synthesized by appending `_emulate` or `_syn` to its suffix such as `fft1d_emulate`.
 
