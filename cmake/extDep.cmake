@@ -22,11 +22,3 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(cxxopts)
 
-message("-- Fetching gTest")
-## googleTest
-FetchContent_Declare(
-  googletest
-  GIT_REPOSITORY https://github.com/google/googletest.git
-  GIT_TAG        release-1.10.0
-)
-FetchContent_MakeAvailable(googletest)
