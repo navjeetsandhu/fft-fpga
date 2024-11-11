@@ -30,6 +30,8 @@ void create_data(float2 *inp, const unsigned num){
   for(unsigned i = 0; i < num; i++){
     inp[i].x = (float)((float)rand() / (float)RAND_MAX);
     inp[i].y = (float)((float)rand() / (float)RAND_MAX);
+
+
   }
 }
 

@@ -43,7 +43,7 @@ fpga_t fftfpga_c2c_1d(const unsigned N, const double2 *inp, double2 *out, const 
   d_outData = clCreateBuffer(context, CL_MEM_READ_WRITE | CL_CHANNEL_2_INTELFPGA, sizeof(double2) * N * batch, NULL, &status);
   checkError(status, "Failed to allocate output device buffer\n");
 
-  printf("-- Copying data from host to device\n");
+  //printf("-- Copying data from host to device\n");
   // Copy data from host to device
   cl_event writeBuf_event;
   status = clEnqueueWriteBuffer(queue1, d_inData, CL_TRUE, 0, sizeof(double2) * N * batch, inp, 0, NULL, &writeBuf_event);
@@ -78,13 +78,13 @@ fpga_t fftfpga_c2c_1d(const unsigned N, const double2 *inp, double2 *out, const 
   status = clSetKernelArg(fft_kernel, 2, sizeof(cl_int), (void*)&inverse_int);
   checkError(status, "Failed to set fft_kernel arg 2");
 
-  printf(inverse_int ? "\tInverse FFT" : "\tFFT");
-  printf(" kernel initialization is complete.\n");
+  //printf(inverse_int ? "\tInverse FFT" : "\tFFT");
+  //printf(" kernel initialization is complete.\n");
 
   size_t ls = N/8;
   size_t gs = batch * ls;
 
-  printf("-- Executing kernels\n");
+  //printf("-- Executing kernels\n");
   // Measure execution time
   cl_event exec_event;
   // FFT1d kernel is the SWI kernel
@@ -108,7 +108,7 @@ fpga_t fftfpga_c2c_1d(const unsigned N, const double2 *inp, double2 *out, const 
   fft_time.exec_t = (cl_double)(kernel_end - kernel_start) * (cl_double)(1e-06); 
 
   // Copy results from device to host
-  printf("-- Transfering results back to host\n");
+  //printf("-- Transferring results back to host\n");
   cl_event readBuf_event;
   status = clEnqueueReadBuffer(queue1, d_outData, CL_TRUE, 0, sizeof(float2) * N * batch, out, 0, NULL, &readBuf_event);
   checkError(status, "Failed to copy data from device");
@@ -156,12 +156,12 @@ fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const b
     return fft_time;
   }
 
-  printf("-- Launching%s 1D FFT of %d batches \n", inv ? " inverse":"", batch);
+  //printf("-- Launching%s 1D FFT of %d batches \n", inv ? " inverse":"", batch);
 
   queue_setup();
 
   cl_mem d_inData, d_outData;
-  printf("Launching%s FFT transform for %d batch \n", inv ? " inverse":"", batch);
+  //printf("Launching%s FFT transform for %d batch \n", inv ? " inverse":"", batch);
 
   // Create device buffers - assign the buffers in different banks for more efficient memory access 
   d_inData = clCreateBuffer(context, CL_MEM_READ_ONLY, sizeof(float2) * N * batch, NULL, &status);
@@ -170,7 +170,7 @@ fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const b
   d_outData = clCreateBuffer(context, CL_MEM_WRITE_ONLY | CL_CHANNEL_2_INTELFPGA, sizeof(float2) * N * batch, NULL, &status);
   checkError(status, "Failed to allocate output device buffer\n");
 
-  printf("-- Copying data from host to device\n");
+  //printf("-- Copying data from host to device\n");
   // Copy data from host to device
   status = clEnqueueWriteBuffer(queue1, d_inData, CL_TRUE, 0, sizeof(float2) * N * batch, inp, 0, NULL, NULL);
   checkError(status, "Failed to copy data to device");
@@ -200,7 +200,7 @@ fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const b
   size_t ls = N/8;
   size_t gs = batch * ls;
 
-  printf("-- Executing kernels\n");
+  //printf("-- Executing kernels\n");
   cl_event startExec_event, endExec_event;
   // Measure execution time
   // Launch the kernel - we launch a single work item hence enqueue a task
@@ -224,7 +224,7 @@ fpga_t fftfpgaf_c2c_1d(const unsigned N, const float2 *inp, float2 *out, const b
   fft_time.exec_t = (cl_double)(kernel_end - kernel_start) * (cl_double)(1e-06);
 
   // Copy results from device to host
-  printf("-- Transfering results back to host\n");
+  //printf("-- Transferring results back to host\n");
   status = clEnqueueReadBuffer(queue1, d_outData, CL_TRUE, 0, sizeof(float2) * N * batch, out, 0, NULL, NULL);
   checkError(status, "Failed to copy data from device");
 
@@ -323,7 +323,7 @@ fpga_t fftfpgaf_c2c_1d_svm(const unsigned N, const float2 *inp, float2 *out, con
   size_t ls = N/8;
   size_t gs = batch * ls;
 
-  printf("-- Executing\n");
+  //printf("-- Executing\n");
   cl_event startExec_event, endExec_event;
 
   status = clEnqueueTask(queue1, fft_kernel, 0, NULL, &endExec_event);
